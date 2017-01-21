@@ -15998,17 +15998,12 @@ JxEREZGc/j+K527C0kwwYQAAAABJRU5ErkJggg==
         <span class="n">img_gray</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">cvtColor</span><span class="p">(</span><span class="n">img</span><span class="p">,</span> <span class="n">cv2</span><span class="o">.</span><span class="n">COLOR_BGR2GRAY</span><span class="p">)</span>
         <span class="c1">#Apply histogram equalization with the function equalizeHist</span>
         <span class="n">eqHist_img</span> <span class="o">=</span> <span class="n">cv2</span><span class="o">.</span><span class="n">equalizeHist</span><span class="p">(</span><span class="n">img_gray</span><span class="p">)</span>
-        <span class="n">reshape_img_gray</span> <span class="o">=</span> <span class="n">eqHist_img</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># reshaping 2-D array to 3-D array to accomodate channel</span>
+        <span class="n">reshape_img_gray</span> <span class="o">=</span> <span class="n">eqHist_img</span><span class="o">.</span><span class="n">reshape</span><span class="p">(</span><span class="mi">32</span><span class="p">,</span><span class="mi">32</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
         <span class="n">img_array</span><span class="p">[</span><span class="n">ind</span><span class="p">]</span> <span class="o">=</span> <span class="n">reshape_img_gray</span>
     <span class="k">return</span> <span class="n">img_array</span>
 
 <span class="n">X_train</span> <span class="o">=</span> <span class="n">process_image</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
 <span class="n">X_test</span> <span class="o">=</span> <span class="n">process_image</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-
-<span class="c1"># print (X_train[0].shape)  # 32x32x3</span>
-<span class="c1"># print (img_gray.shape)    # 32x32  when we convert RGB to gray,the grayscale store the value in 2-D array. </span>
-<span class="c1"># print (eqHist_img.shape)  # 32x32</span>
-<span class="c1"># print (reshape_img_gray.shape) # 1x32x32x1</span>
 </pre></div>
 
 </div>
@@ -16018,60 +16013,19 @@ JxEREZGc/j+K527C0kwwYQAAAABJRU5ErkJggg==
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Data Standardization</span>
-
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Data prior to applying Standardization :&quot;</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
-
 <span class="k">def</span> <span class="nf">standardize_images</span><span class="p">(</span><span class="n">data</span><span class="p">):</span>
     <span class="n">mean_data</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>   
     <span class="n">std</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">std</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="n">data_array</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">asarray</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
     <span class="n">standardized_data</span> <span class="o">=</span> <span class="p">(</span><span class="n">data_array</span> <span class="o">-</span> <span class="n">mean_data</span><span class="p">)</span> <span class="o">/</span> <span class="n">std</span> 
     <span class="k">return</span> <span class="n">standardized_data</span>
-
-<span class="n">X_train</span> <span class="o">=</span> <span class="n">standardize_images</span><span class="p">(</span><span class="n">X_train</span><span class="p">)</span>
-<span class="n">X_test</span> <span class="o">=</span> <span class="n">standardize_images</span><span class="p">(</span><span class="n">X_test</span><span class="p">)</span>
-
-<span class="nb">print</span> <span class="p">(</span><span class="s2">&quot;Data after applying Standardization :&quot;</span><span class="p">,</span> <span class="n">X_train</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">T</span><span class="p">)</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>Data prior to applying Standardization : [[[  17.   36.   25. ...,  169.   81.   42.]
-  [  12.   29.   38. ...,  157.   91.   98.]
-  [  38.   42.   60. ...,  142.   52.   25.]
-  ..., 
-  [   6.   14.    6. ...,   78.  104.   95.]
-  [   0.   12.    7. ...,   95.  121.   88.]
-  [   0.   17.   14. ...,  101.   98.   78.]]]
-Data after applying Standardization : [[[-1.55223514 -1.29510289 -1.44396893 ...,  0.5048229  -0.68610544
-   -1.21390323]
-  [-1.61990153 -1.38983583 -1.26803634 ...,  0.34242358 -0.55077267
-   -0.45603974]
-  [-1.26803634 -1.21390323 -0.97030425 ...,  0.13942443 -1.07857046
-   -1.44396893]
-  ..., 
-  [-1.70110119 -1.59283497 -1.70110119 ..., -0.72670527 -0.37484008
-   -0.49663957]
-  [-1.78230085 -1.61990153 -1.68756791 ..., -0.49663957 -0.14477437
-   -0.5913725 ]
-  [-1.78230085 -1.55223514 -1.59283497 ..., -0.41543991 -0.45603974
-   -0.72670527]]]
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -16137,7 +16091,7 @@ Data after applying Standardization : [[[-1.55223514 -1.29510289 -1.44396893 ...
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Define your architecture here.</span>
@@ -16147,71 +16101,25 @@ Data after applying Standardization : [[[-1.55223514 -1.29510289 -1.44396893 ...
 
 <span class="n">seed</span> <span class="o">=</span> <span class="mi">7</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">X_validation</span><span class="p">,</span><span class="n">y_train</span><span class="p">,</span><span class="n">y_validation</span> <span class="o">=</span> <span class="n">train_test_split</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">,</span> <span class="n">test_size</span><span class="o">=</span><span class="mf">0.33</span><span class="p">,</span> <span class="n">random_state</span><span class="o">=</span><span class="n">seed</span><span class="p">,</span> <span class="n">stratify</span><span class="o">=</span><span class="n">y_train</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">200</span><span class="p">])</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[ 8 22  1  1 18 22 18 13 25  4  5  3  8  8  3 15  0 12 12 31  4  7  8 38 13
- 38  3 18  9 28 25 13 25  3 17 11  8 17 20 17 33  2 33 35 10 31  8 13 28  3
- 28  0 13 26 38 10 18 18 10  3 38 10  1 13 11 18 15  4  9 19  3 31 23 25  2
-  4 31  4 14  1  4  5 31 18  2 12 14 28 18 10 10 38 19  2 12 35  3  3 18 12
- 28  7 18  7  5 21 25 38  1 38 35  2 13  8  1 26 12 11 28 22  4 15 26  2 11
- 25 31 24 19 12  4 22 18 25  1  5  3  1 16  1  3 31  5  7  4  5  0 12 34 29
- 17  5  4 18 13 10 18 13 18 35 12  5  5 27  4  1 38  1 12 23  2  8  5  7  4
-  4 34  8 15  1 16 13 14  2 38 38  6 35 26 17  2 17 12 21 29  4  9 31 13 28]
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
 </div>
 <div class="cell border-box-sizing code_cell rendered">
 <div class="input">
-<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
 <div class="inner_cell">
     <div class="input_area">
 <div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Shuffle the training data</span>
 
 <span class="kn">from</span> <span class="nn">sklearn.utils</span> <span class="k">import</span> <span class="n">shuffle</span>
 <span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span> <span class="o">=</span> <span class="n">shuffle</span><span class="p">(</span><span class="n">X_train</span><span class="p">,</span> <span class="n">y_train</span><span class="p">)</span>
-
-<span class="nb">print</span><span class="p">(</span><span class="n">y_train</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">200</span><span class="p">])</span>
 </pre></div>
 
 </div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>[13  8  8  5  5 14  5 38 15 38 21 13 12 18 18  3 12 23 17  5 34 13 38 38 38
- 42  5 13 35 36  7  3 13  7 17 35 38 32 10 34  2 17  6 31 33 31 11 25 13  7
- 22 39  2 13  4 41  5  4 14 35  5 38 13 36  5  8 41 35  2 10 28  8 14 40 12
-  8  6  9 13 12  8  1  4 17 11  1 23 29  6 42 21  1 38  1 15 21  2 12  4  7
-  7 17 40 38 11 32 12 11  1  1 14 38 12  2  4  3  9 35 11  7  7 18  2  1  9
-  5 12 35  8  1 30 10 10  8  3 39  2 18  3 40 13 10 25  4  2 13 20  1 25 33
-  7  9  2 22 12 39  1  4  3 13 31  7 35 21 38  5 38 18 31  9  5  4 26 38 17
- 30 12 38 38 10 23  8 36  8  6  9 17 23  6  1 18 36 11 13  9 13  5 10 13 23]
-</pre>
-</div>
-</div>
-
 </div>
 </div>
 
@@ -17002,7 +16910,7 @@ width=800
     <span class="n">fc2</span>    <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">relu</span><span class="p">(</span><span class="n">fc2</span><span class="p">)</span>
     
     <span class="c1"># SOLUTION : Dropout</span>
-    <span class="n">fc2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">fc2</span><span class="p">,</span><span class="o">.</span><span class="mi">50</span><span class="p">)</span> <span class="c1">#dropout_keep_Prob .50</span>
+    <span class="n">fc2</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">dropout</span><span class="p">(</span><span class="n">fc2</span><span class="p">,</span><span class="o">.</span><span class="mi">50</span><span class="p">)</span> 
     
     <span class="c1"># SOLUTION: Layer 5: Fully Connected. Input = 120. Output = 43.</span>
     <span class="n">fc3_W</span>  <span class="o">=</span> <span class="n">var_weight</span><span class="p">(</span><span class="n">shape</span><span class="o">=</span><span class="p">(</span><span class="mi">120</span><span class="p">,</span> <span class="mi">43</span><span class="p">))</span>
@@ -17055,15 +16963,15 @@ I have trained the network for 80 epochs and validated against 33% of the traini
 <span class="n">one_hot_y</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">one_hot</span><span class="p">(</span><span class="n">y</span><span class="p">,</span> <span class="mi">43</span><span class="p">)</span>
 <span class="n">keep_prob</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">placeholder</span><span class="p">(</span><span class="n">tf</span><span class="o">.</span><span class="n">float32</span><span class="p">)</span> 
 
-<span class="c1"># learning_rate = 0.001 # 1e-3</span>
+<span class="c1"># learning_rate = 0.001 </span>
 
 <span class="n">batch</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">Variable</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
 <span class="c1"># Decay once per epoch, using an exponential schedule starting at 0.01.</span>
 <span class="n">learning_rate</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">exponential_decay</span><span class="p">(</span>
-  <span class="mf">0.01</span><span class="p">,</span>                <span class="c1"># Base learning rate.</span>
-  <span class="n">batch</span> <span class="o">*</span> <span class="n">BATCH_SIZE</span><span class="p">,</span>  <span class="c1"># Current index into the dataset.</span>
-  <span class="n">n_train</span><span class="p">,</span>             <span class="c1"># train_size : Decay step.</span>
-  <span class="mf">0.95</span><span class="p">,</span>                <span class="c1"># Decay rate.</span>
+  <span class="mf">0.01</span><span class="p">,</span>                
+  <span class="n">batch</span> <span class="o">*</span> <span class="n">BATCH_SIZE</span><span class="p">,</span>  
+  <span class="n">n_train</span><span class="p">,</span>             
+  <span class="mf">0.95</span><span class="p">,</span>                
   <span class="n">staircase</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
 
 
@@ -17071,9 +16979,6 @@ I have trained the network for 80 epochs and validated against 33% of the traini
 <span class="n">logits</span> <span class="o">=</span> <span class="n">LeNet</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
 <span class="n">cross_entropy</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">nn</span><span class="o">.</span><span class="n">softmax_cross_entropy_with_logits</span><span class="p">(</span><span class="n">logits</span><span class="p">,</span> <span class="n">one_hot_y</span><span class="p">)</span>
 <span class="n">loss_operation</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">reduce_mean</span><span class="p">(</span><span class="n">cross_entropy</span><span class="p">)</span>
-<span class="c1"># optimizer = tf.train.AdamOptimizer(learning_rate = learning_rate)</span>
-<span class="c1"># training_operation = optimizer.minimize(loss_operation)</span>
-<span class="c1"># momentum for the optimization.</span>
 <span class="n">training_operation</span> <span class="o">=</span> <span class="n">tf</span><span class="o">.</span><span class="n">train</span><span class="o">.</span><span class="n">MomentumOptimizer</span><span class="p">(</span><span class="n">learning_rate</span><span class="p">,</span><span class="mf">0.9</span><span class="p">)</span><span class="o">.</span><span class="n">minimize</span><span class="p">(</span><span class="n">loss_operation</span><span class="p">,</span><span class="n">global_step</span><span class="o">=</span><span class="n">batch</span><span class="p">)</span>
 </pre></div>
 
@@ -26915,42 +26820,6 @@ SimllFJKKaXUgqeBUKWUUkoppZRSSiml1IL3/wOacYxihYPfLAAAAABJRU5ErkJggg==
 >
 </div>
 
-</div>
-
-</div>
-</div>
-
-</div>
-<div class="cell border-box-sizing code_cell rendered">
-<div class="input">
-<div class="prompt input_prompt">In&nbsp;[20]:</div>
-<div class="inner_cell">
-    <div class="input_area">
-<div class=" highlight hl-ipython3"><pre><span></span><span class="c1">### Visualize the softmax probabilities here.</span>
-<span class="c1">### Feel free to use as many code cells as needed.</span>
-
-<span class="k">for</span> <span class="n">nbr</span><span class="p">,</span> <span class="n">prob</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">softmax_probabilities</span><span class="o">.</span><span class="n">values</span><span class="p">):</span>
-    <span class="nb">print</span> <span class="p">(</span><span class="n">nbr</span><span class="p">,</span><span class="n">prob</span><span class="p">)</span>
-</pre></div>
-
-</div>
-</div>
-</div>
-
-<div class="output_wrapper">
-<div class="output">
-
-
-<div class="output_area"><div class="prompt"></div>
-<div class="output_subarea output_stream output_stdout output_text">
-<pre>0 [  1.00000000e+00   7.58034721e-14   0.00000000e+00]
-1 [ 1.  0.  0.]
-2 [ 1.  0.  0.]
-3 [ 1.  0.  0.]
-4 [  1.00000000e+00   1.67901276e-33   0.00000000e+00]
-5 [ 1.  0.  0.]
-</pre>
-</div>
 </div>
 
 </div>
