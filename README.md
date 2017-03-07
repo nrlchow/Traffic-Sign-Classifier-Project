@@ -14,14 +14,10 @@ The pickled data is a dictionary with 4 key/value pairs:
 
 [//]: # (Image References)
 [image1]: ./images/Visualize-German-Traffic.png "Visualize-German-Traffic"
-[image2]: ./output_images/Distribution-of -Labels-Per-Class.png "Distribution-of -Labels-Per-Class"
-[image3]: ./output_images/final_architecture.png "final_architecture"
-[image4]: ./output_images/test_image.png "test_image"
-[image5]: ./output_images/predicted_image.png "predicted_image"
-[image6]: ./output_images/slide_window_96x96.png "window_search"
-[image7]: ./output_images/slide_window_128x128.png "window_search2"
-
- 
+[image2]: ./images/Distribution-of -Labels-Per-Class.png "Distribution-of -Labels-Per-Class"
+[image3]: ./images/final_architecture.png "final_architecture"
+[image4]: ./images/test_image.png "test_image"
+[image5]: ./images/predicted_image.png "predicted_image"
  
 
 # Visualize the German Traffic Signs Dataset
