@@ -14,7 +14,7 @@ The pickled data is a dictionary with 4 key/value pairs:
 
 [//]: # (Image References)
 [image1]: ./images/Visualize-German-Traffic.png "Visualize-German-Traffic"
-[image2]: ./images/Distribution-of -Labels-Per-Class.png "Distribution-of -Labels-Per-Class"
+[image2]: ./images/label_count_by_class.png "label_count_by_class"
 [image3]: ./images/final_architecture.png "final_architecture"
 [image4]: ./images/test_image.png "test_image"
 [image5]: ./images/predicted_image.png "predicted_image"
@@ -22,14 +22,14 @@ The pickled data is a dictionary with 4 key/value pairs:
 
 # Visualize the German Traffic Signs Dataset
 
-The traffic signs examples are not uniformly distributed across class labels.
-
-
 Shown below is example of German Traffic Signs image data set.
 
 ![alt text][image1]
 
-# Distribution of Labels Per Class
+
+# Label class distribution 
+
+The traffic signs examples are not uniformly distributed across class labels.
 
 ![alt text][image2]
 
@@ -62,21 +62,21 @@ The first Convolutional layer takes original image as input.It applies 5x5 kerna
 Activation layer uses RELU activation function.
 Pooling layer taking the max over 2x2 patches.This result in output shape of 14x14x6.
 
-## Layer 2: Convolutional.
+##Layer 2: Convolutional.
 The input is 14x14x6 that resulted from the first Convolutional layer's max pooling operation. This layer applies 5x5 filter,stride of length 1,a depth of 32 with VAILD padding.This result in a feature map of 10x10x32. 
 Activation layer uses RELU activation function.
 Pooling layer taking the max over 2x2 patches.This result in output shape of 5x5x32.
 Flatten layer flattens the inputs to 2D (batches,length) to be used by fully connected layers.The batch size is ignored here as it remains unaltered.After multiplying the output shape of max pooling layer 5x5x32 results 800 neurons.
 
-## Layer 3: Fully Connected.
+##Layer 3: Fully Connected.
 Fully connected layer with 800 neurons with RELU activation 
 Dropout layer with dropout probaility 0.5
 
-## Layer 4: Fully Connected.
+##Layer 4: Fully Connected.
 Fully connected layer with 400 neurons with rectifier activation.
 Dropout layer with dropout probaility 0.5
 
-## Layer 5: Fully Connected (Logits).
+##Layer 5: Fully Connected (Logits).
 Fully connected layer with 120 neurons and rectifier activation.
 Output :
 This should have 43 outputs.
